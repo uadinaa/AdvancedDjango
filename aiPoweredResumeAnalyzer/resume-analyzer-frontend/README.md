@@ -44,7 +44,7 @@ An AI-powered resume analysis platform that allows users to upload resumes, rece
 
 ## Demo
 
-![Demo Screenshot](https://drive.google.com/drive/folders/1FOAoXyIb1E5AgqryZereaACMHwtpbd3D?usp=sharing)
+[Demo](https://drive.google.com/drive/folders/1FOAoXyIb1E5AgqryZereaACMHwtpbd3D?usp=sharing)
 
 
 ---
