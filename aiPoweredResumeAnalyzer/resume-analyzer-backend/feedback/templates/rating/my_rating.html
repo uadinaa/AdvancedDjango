@@ -1,0 +1,57 @@
+{% extends "feedback/base.html" %}
+{% block content %}
+  <h2>My Resume Ratings</h2>
+
+  <form method="get" class="mb-4">
+    <label>Min Final Score:</label>
+    <input type="number" name="min_score" step="0.1" value="{{ filters.min_score }}">
+
+    <label>Start Date:</label>
+    <input type="date" name="start_date" value="{{ filters.start_date }}">
+
+    <label>End Date:</label>
+    <input type="date" name="end_date" value="{{ filters.end_date }}">
+
+    <button type="submit">Apply Filters</button>
+  </form>
+
+  {% if page_obj %}
+    <ul>
+      {% for r in page_obj %}
+        <li>
+          <strong>Resume ID:</strong> {{ r.resume_id }}<br>
+          <strong>Keyword Score:</strong> {{ r.keyword_score }}%<br>
+          <strong>Skill Score:</strong> {{ r.skill_score }}%<br>
+          <strong>Final Score:</strong> {{ r.final_score }}%<br>
+          <strong>Date:</strong> {{ r.timestamp }}
+        </li>
+        <hr>
+      {% endfor %}
+    </ul>
+
+    <!-- Export buttons outside the loop -->
+    <a href="{% url 'export_ratings_csv' %}" class="btn btn-primary">⬇️ Export as CSV</a>
+    <a href="{% url 'export_ratings_pdf' %}" class="btn btn-secondary">⬇️ Export as PDF</a>
+
+    <!-- ✅ Updated pagination to include filters -->
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?{% if filters.min_score %}min_score={{ filters.min_score }}&{% endif %}
+                  {% if filters.start_date %}start_date={{ filters.start_date }}&{% endif %}
+                  {% if filters.end_date %}end_date={{ filters.end_date }}&{% endif %}
+                  page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+        <a href="?{% if filters.min_score %}min_score={{ filters.min_score }}&{% endif %}
+                  {% if filters.start_date %}start_date={{ filters.start_date }}&{% endif %}
+                  {% if filters.end_date %}end_date={{ filters.end_date }}&{% endif %}
+                  page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
+    </div>
+  {% else %}
+    <p>You haven’t rated any resumes yet.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "feedback/base.html" %}
+
+{% block title %}Rate Resume{% endblock %}
+
+{% block content %}
+    <form method="post" id="rating-form">
+        {% csrf_token %}
+        <label for="resume_id">Resume ID:</label><br>
+        <input type="text" name="resume_id" id="resume_id" required><br><br>
+
+        <label for="job_description">Job Description:</label><br>
+        <textarea name="job_description" id="job_description" rows="6" required></textarea><br><br>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+{% if rating %}
+        {% if rating.error %}
+            <p style="color:red;">{{ rating.error }}</p>
+        {% else %}
+            <div class="result-block">
+                <h2>Rating for Resume ID: {{ resume_id }}</h2>
+                <p><strong>Job Title:</strong> {{ rating.job_title }}</p>
+                <p><strong>Keyword Score:</strong> {{ rating.keyword_score }}%</p>
+                <p><strong>Skill Score:</strong> {{ rating.skill_score }}%</p>
+                <p><strong>Final Score:</strong> {{ rating.final_score }}%</p>
+                <p><strong>Rated At:</strong> {{ rating.timestamp }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
