@@ -177,8 +177,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Use SMTP in 
 EMAIL_HOST = 'smtp.yourmailprovider.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'arailymabitova97@gmail.com'
-EMAIL_HOST_PASSWORD = 'Dinalove2001@'
+EMAIL_HOST_USER = 'отирик почта@gmail.com'
+EMAIL_HOST_PASSWORD = 'кетиндер албастылар я вам не дам пароль'
 DEFAULT_FROM_EMAIL = 'no-reply@resumanalyzer.com'
 
 
